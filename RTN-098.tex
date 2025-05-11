@@ -9,15 +9,18 @@
 %\input{aglossary.tex}
 %\makeglossaries
 
-\title{ToO operations and procedures}
+\title{Rubin ToO operations and procedures}
 
 % This can write metadata into the PDF.
 % Update keywords and author information as necessary.
 \hypersetup{
-    pdftitle={ToO operations and procedures},
-    pdfauthor={First Last},
+    pdftitle={Rubin ToO operations and procedures},
+    pdfauthor={Sean MacBride,
+               Tiago Ribeiro,
+               
+               },
     pdfkeywords={}
-}
+    }
 
 % Optional subtitle
 % \setDocSubtitle{A subtitle}
@@ -41,7 +44,7 @@ Activities and procedures for ToO operations through early commissioning and SV 
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
-  \addtohist{1}{YYYY-MM-DD}{Unreleased.}{First Last}
+  \addtohist{1}{2025-05-11}{Unreleased.}{Sean MacBride}
 }
 
 
@@ -51,22 +54,37 @@ Activities and procedures for ToO operations through early commissioning and SV 
 \maketitle
 % Frequently for a technote we do not want a title page  uncomment this to remove the title page and changelog.
 % use \mkshorttitle to remove the extra pages
-
-% ADD CONTENT HERE
-% You can also use the \input command to include several content files.
+\section{Introduction}\label{sec:introduction}
+\input{introduction.tex}
+\newpage
+\section{Systems Overview}\label{sec:sysOverview}
+\input{systemsOverview.tex}
+\newpage
+\section{Existing Bottlenecks}\label{sec:existingBottlenecks}
+\input{bottlenecks.tex}
+\newpage
+\section{Workflow during SV}\label{sec:workflow}
+\input{SVWorkflow.tex}
+\newpage
+\section{Tests and ToO Responses}\label{sec:ToOEvents}
+\input{testsAndTriggers.tex}
+\newpage
+\section{Lessons learned from SV testing}\label{sec:LessonsLearned}
+\input{LessonsLearned.tex}
 
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
+\newpage
 \section{References} \label{sec:bib}
 \renewcommand{\refname}{} % Suppress default Bibliography section
 \bibliography{local,lsst,lsst-dm,refs_ads,refs,books}
 
+\newpage
 % Make sure lsst-texmf/bin/generateAcronyms.py is in your path
 \section{Acronyms} \label{sec:acronyms}
 \input{acronyms.tex}
-% If you want glossary uncomment below -- comment out the two lines above
-%\printglossaries
+
 
 
 
