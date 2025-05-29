@@ -1,9 +1,107 @@
+The Rubin ToO system is composed of five distinct components, each responsible for a different aspect of ToO operations and observations.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/workflowDiagram.png}
+    \caption{The general workflow during the SV period, with the five separate teams and their main responsibilities listed.}
+    \label{fig:workflowDiagram}
+\end{figure}
+
 \subsection{Incoming alert stream}\label{subsec:alertStream}
+
+The Rubin ToO system starts at the incoming alert stream. The incoming alert stream is responsible for parsing alerts from external experiments and sending them to Rubin infrastructure.
+
+Rubin Observatory considers ToO alerts from a variety of astrophysical phenomena and experiments, including 
+
+\begin{itemize}
+    \item \textbf{Gravitational waves:} LIGO-Virgo-KAGRA (LVK) Collaboration
+    \item \textbf{High energy neutrinos:} IceCube Neutrino Observatory
+    \item \textbf{Potentially hazardous objects:} The NASA Jet Propulsion Laboratory (JPL) Scout and JPL Sentry experiments
+    \item \textbf{Galactic supernovae:} The Supernova Early Warning System (SNEWS) and the Super-Kamiokande (Super-K) experiment
+    \item \textbf{Lensed GRBs:} LVK and the Neil Gehrels Swift Observatory
+\end{itemize}
+
+All incoming alerts are handled by Scalable Cyberinfrastructure to support Multi-Messenger Astrophysics (SCiMMA) HopSkotch. Alerts are received from different experiments before being assessed for alert quality. Alerts of a certain quality are then passed to Rubin infrastructure. In this way, all alerts that arrive at Rubin infrastructure are high quality alerts worthy of follow-up. This enables future revisions of Rubin observing strategy related to ToO to be developed internal to the Rubin Scheduler.
+
+Alert quality for Rubin observations is set by the Rubin science community, who developed a set of criteria for ToO observations in their 2024 recommendation (\cite{RubinToO2024}). This recommendation has been adopted by SCiMMA to ensure the EFD and Rubin scheduler do not need to perform additional checks of alert quality.
 
 \subsection{Engineering facility database}\label{subsec:EFD}
 
+The Rubin engineering facility database (EFD) hosts telemetry and information about every Rubin Observatory component that interacts with middleware. For ToO purposes, this includes SCiMMA alerts. These alerts are received at the summit, including skymap information for the alerts. 
+
+The Scheduler Commandable SAL Component (CSC) collects telemetry from the EFD and hands them over to the Driver, which formats it in a way the scheduling algorithm understands. By using a general purpose interface for collecting and passing telemetry from the EFD to the scheduling algorithm, it allows us to easily add new data sources as long as the data is in the EFD. This flexible design supports the SCiMMA alert stream, but also manual alert information added by observing specialists or other ToO scientists to the EFD (\cite{TSTN-035}). 
+
 \subsection{The Rubin Scheduler}\label{subsec:Scheduler}
+
+The Rubin scheduler is responsible for scheduling and executing observations for the LSST. The Rubin scheduler executes different surveys for the LSST, each of which has different goals and targeted observations. ToO observations, all of which require first-night observations of phenomena, will schedule observations according to the community designed strategies. 
+
+
+
+\begin{table}[]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Rubin Scheduler ToO configuration} & \textbf{Strategy from \cite{RubinToO2024}} \\ \hline
+GW\_case\_B                         & GW, neutron star component, gold ($\Omega <100\deg^2$)                                             \\ \hline
+GW\_case\_C                         & GW, Unidentified source, gold ($\Omega <100\deg^2$)                                   \\ \hline
+GW\_case\_D                         & GW, neutron star component, silver ($\Omega <500\deg^2$)                                           \\ \hline
+GW\_case\_E                         & GW, Unidentified source, silver ($\Omega <500\deg^2$)                                 \\ \hline
+BBH\_case\_A                        & GW, Binary black-hole, dark time, nearby event                                     \\ \hline
+BBH\_case\_B                        & GW, Binary black-hole, dark time, distant event                                      \\ \hline
+BBH\_case\_C                        & GW, Binary black-hole, bright time                                         \\ \hline
+GW\_case\_large                     & GW, large skymaps ($\Omega>500\deg^2$)                                    \\ \hline
+lensed\_BNS\_case\_A                & Lensed BNS, $\sim900\deg^2$ skymap                                      \\ \hline
+lensed\_BNS\_case\_B                & Lensed BNS, $\sim15\deg^2$ skymap                                       \\ \hline
+neutrino and neutrino\_u            & High energy neutrino event                                            \\ \hline
+SSO\_night and SSO\_twilight                       & Potentially hazardous asteroid                                           \\ \hline
+SN\_Galactic                        & Galactic supernova                                  \\ \hline
+Lensed\_GRB                         & Lensed GRB                                          \\ \hline
+\end{tabular}
+\caption{The strategy naming used in the Rubin Scheduler (left) to execute the community observing strategy recommendations (right) from \cite{RubinToO2024}.}
+\label{table:ToOStrategies_sched}
+\end{table}
+
+SCiMMA alerts passed to the EFD will have metadata associated with them that denotes the alert type. This piece of metadata is passed to the Rubin scheduler to execute the appropriate strategy, as listed in table \ref{table:ToOStrategies_sched}.
+
+GW observing strategies are differentiated by the 90\% confidence interval area ($\Omega$) from LVK alerts. Unidentified GW sources and NS component sources of similar skymap size (i.e. gold or silver) follow identical strategy. Binary black-hole event strategy is differentiated by the distance of the event and the observing conditions (dark or bright time). All strategies except for large GW skymaps and lensed GRBs have been tested and verified in the Rubin Scheduler. Large GW skymaps require specific coordination with the SCOC to cover the area, and lensed GRBs do not have an explicit strategy recommendation in \cite{RubinToO2024}.
+
+\subsection{The Prompt Processing Pipeline}\label{subsec:PP}
+
+How does PP work
+
+Current state of PP
+
+On-call team 
+
+DECam processing
+
+Self-templating
 
 \subsection{The Observing and Science Validation teams}\label{subsec:ObsSVTeams}
 
-\subsection{The Prompt Processing Pipeline}\label{subsec:PP}
+In a non-commissioning environment, ToO observations are automated with minimal intervention by observers or ToO scientists. In the era of early Rubin operations, this is not the case. Owing to the commissioning of other Rubin Observatory systems and minimal Rubin template coverage in early operations, ToO observations will require significant intervention and support from the Rubin science community and the prompt-processing groups. 
+
+In line with the recommendations from the SCOC (\cite{PSTN-056}), a ToO advisory committee has been formed. The aim of this committee is to assess the viability of pursuing a ToO during the early operations period. The decision to pursue a particular ToO event, in no particular order, is based upon the following criteria:
+
+\begin{enumerate}
+    \item The preparedness of the Observatory to respond to a ToO
+    \item The scientific impact of a Rubin-led discovery
+    \item The level of disruption to the SV surveys
+\end{enumerate}
+
+The ToO advisory committee is composed of Rubin Observatory members with a wide range of expertise. The current committee members are:
+
+\begin{itemize}
+
+    \item Sean MacBride - Chair, Rubin ToO coordinator
+    \item Zeljko Ivezic - Project leadership
+    \item Bob Blum - Project leadership
+    \item Keith Bechtol - System Verification and Validation Scientist
+    \item Robert Lupton - Commissioning scientist
+    \item Yousuke Utsumi - ToO Scientist and Camera expert
+    \item Eric Bellm - Prompt processing lead
+    \item Federica Bianco - Deputy project scientist, Survey cadence optimization committee
+    \item Tiago Ribeiro - Scheduler scientist and software architect
+    \item Shreya Anand - Rubin-LVK Liaison
+    \item Deep Chatterjee - LVK Liaison
+\end{itemize}
