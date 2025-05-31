@@ -5,3 +5,7 @@
 #
 # Example:
 #   MIA:Missing In Action
+NS:Neutron star
+TSTN:Telescope and Site Tech Note
+BBH:Binary black-hole
+PP:Post processing
