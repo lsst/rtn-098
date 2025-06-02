@@ -9,3 +9,4 @@ NS:Neutron star
 TSTN:Telescope and Site Tech Note
 BBH:Binary black-hole
 PP:Post processing
+SCiMMA:Scalable Cyberinfrastructure to support Multi-Messenger Astrophysics

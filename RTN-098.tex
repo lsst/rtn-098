@@ -2,6 +2,8 @@
 \input{meta}
 
 % Package imports go here.
+\usepackage{listings}
+\usepackage{adjustbox}
 
 % Local commands go here.
 
@@ -42,7 +44,9 @@ We describe the procedures and workflows for Target-of-Opportunity observations 
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
+  \addtohist{2}{2025-06-03}{Results from verification - UNRELEASED}{Sean MacBride}
   \addtohist{1}{2025-05-29}{First revision, covering intro and systems overview.}{Sean MacBride}
+  
 }
 
 
@@ -57,13 +61,14 @@ We describe the procedures and workflows for Target-of-Opportunity observations 
 \newpage
 \section{Systems Overview}\label{sec:sysOverview}
 \input{systemsOverview.tex}
+\newpage
+\section{System verification}\label{sec:verification}
+\input{validation.tex}
+\newpage
 % \newpage
 % \section{Existing Bottlenecks}\label{sec:existingBottlenecks}
 % \input{bottlenecks.tex}
 \newpage
-% \section{Workflow during SV}\label{sec:workflow}
-% \input{SVWorkflow.tex}
-% \newpage
 \section{Tests and ToO Responses}\label{sec:ToOEvents}
 \input{testsAndTriggers.tex}
 \newpage
@@ -73,6 +78,9 @@ We describe the procedures and workflows for Target-of-Opportunity observations 
 \appendix
 % Include all the relevant bib files.
 % https://lsst-texmf.lsst.io/lsstdoc.html#bibliographies
+\newpage
+\section{Detailed results from validation tests} \label{sec:validationResults}
+\input{schedulerValidationResults}
 \newpage
 \section{References} \label{sec:bib}
 \renewcommand{\refname}{} % Suppress default Bibliography section
