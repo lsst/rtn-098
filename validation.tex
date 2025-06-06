@@ -41,7 +41,7 @@ The individual alert types have different community defined strategies, as liste
 
 To test each ToO strategy, a simulated LSST survey was injected with a ToO of the relevant type and skymap characteristics. The ToO was then handled by the scheduler, which planned and executed the observations following the recommendations from \cite{RubinToO2024}. We summarize the results in \ref{subsubsec:SVRequiredValidation}-\ref{subsubsec:SVOptionalValidation}, and provide the complete results of these simulations in appendix \ref{sec:validationResults}.
 
-\subsubsection{Strategies required for SV}\label{subsubsec:SVRequiredValidation}
+\subsubsection{Anticipated ToO strategies during the SV period}\label{subsubsec:SVRequiredValidation}
 
 As recommended by \cite{PSTN-056}, PHA and high-energy neutrino alerts should start as soon as possible. Additionally, given the LVK observing schedule, all GW alerts should start as soon as possible to maximize the overlap of GW alerts and Rubin observations. Therefore, all strategies from table \ref{table:ToOStrategies_sched} except for galactic SN, lensed BNS, and large GW skymaps are considered required for SV.
 
@@ -66,9 +66,9 @@ Potentially hazardous asteroid                      & Pass                 \\ \h
 
 All SV-required ToO strategies passed validation tests in the Rubin scheduler. Minor complications with the BBH, dark time, nearby event strategy were identified during testing. Particularly, the cadence of (1, 3, 8, 10, 40) nights of observation in the ugi filter set is not guaranteed, since the u-band is removed from the camera on a 14-day cadence. There is the possibility that the u band will not be available for all planned nights of observation. Depending on the circumstance, either the cadence of observation should be adjusted, or the filter set should be adjusted to gri, which will always be available in LSSTCam.
 
-\subsubsection{Additional ToO strategies}\label{subsubsec:SVOptionalValidation}
+\subsubsection{Additional ToO strategies to be pursued during SV}\label{subsubsec:SVOptionalValidation}
 
-While galactic SN, lensed BNS, and large GW skymaps are not considered required for the SV surveys, implementations exist in the Rubin scheduler, and the scientific impact of any of these ToO's is significant. While not required, support for these ToO's remains a priority.
+While galactic SN, lensed BNS, and large GW skymaps are not expected during the SV surveys due to lower event rates, implementations exist in the Rubin scheduler, and the scientific impact of any of these ToO's is significant. Support for these ToO's remains a priority and events during the SV period should be pursued without reservations, provided the observing strategy is implemented and ready.
 
 \begin{table}[]
 \centering
