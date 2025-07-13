@@ -1,0 +1,46 @@
+\subsection{EFD alert schema}
+
+The EFD alert schema. Note that the \texttt{reward\_map} field is iterated as \texttt{reward\_map0}, \texttt{reward\_map1}, ... \texttt{reward\_map12287}, where each entry is one pixel in a flattened Healpix skymap of $\texttt{nside}=32$ and \texttt{RING} ordering.
+
+\begin{lstlisting}
+        {"namespace": "lsst.scimma",
+         "type": "record",
+         "name": "ToO_alert",
+         "fields": [
+                {
+    "type": "record",
+    "name": "AutoRecord",
+    "fields": [
+        {   "name": "alert_type",
+            "type": "string"
+        },
+        {   "name": "time_created",
+            "type": "string"
+        },
+        {   "name": "is_test",
+            "type": "boolean"
+        },
+        {   "name": "is_update",
+            "type": "boolean"
+        },
+        {   "name": "superevent_id",
+            "type": "string"
+        },
+        {   "name": "timestamp",
+            "type": "long"
+        },
+        {   "name": "reward_map",
+            "type": {"type": "array",
+                     "items": "int"
+            }
+        },
+        {   "name": "instrument",
+            "type": {"type": "array",
+                     "items": "string"
+            }
+        }
+    ]
+}
+]
+}
+\end{lstlisting}

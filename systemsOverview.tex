@@ -21,7 +21,7 @@ Rubin Observatory considers ToO alerts from a variety of astrophysical phenomena
     \item \textbf{Lensed GRBs:} LVK and the Neil Gehrels Swift Observatory
 \end{itemize}
 
-All incoming alerts are handled by Scalable Cyberinfrastructure to support Multi-Messenger Astrophysics (SCiMMA) HopSkotch. Alerts are received from different experiments before being assessed for alert quality. Alerts of a certain quality are then passed to Rubin infrastructure. In this way, all alerts that arrive at Rubin infrastructure are high quality alerts worthy of follow-up. This enables future revisions of Rubin observing strategy related to ToO to be developed internal to the Rubin Scheduler.
+All incoming alerts are handled by Scalable Cyberinfrastructure to support Multi-Messenger Astrophysics (SCiMMA) HopSkotch. Alerts are received from different experiments before being assessed for alert quality. Alerts passing our quality filters are then passed to Rubin infrastructure. In this way, all alerts that arrive at Rubin infrastructure are high quality alerts worthy of follow-up. This enables future revisions of Rubin observing strategy related to ToO to be developed internal to the Rubin Scheduler.
 
 Alert quality for Rubin observations is set by the Rubin science community, who developed a set of criteria for ToO observations in their 2024 recommendation (\cite{RubinToO2024}). This recommendation has been adopted by SCiMMA to ensure the EFD and Rubin scheduler do not need to perform additional checks of alert quality.
 
@@ -57,7 +57,7 @@ SSO\_night and SSO\_twilight                       & Potentially hazardous aster
 SN\_Galactic                        & Galactic supernova                                  \\ \hline
 Lensed\_GRB                         & Lensed GRB                                          \\ \hline
 \end{tabular}
-\caption{The strategy naming used in the Rubin Scheduler (left) to execute the community observing strategy recommendations (right) from \cite{RubinToO2024}.}
+\caption{The strategy naming used in the Rubin Scheduler (left) to execute the community observing strategy recommendations (right).}
 \label{table:ToOStrategies_sched}
 \end{table}
 
@@ -96,13 +96,14 @@ The ToO advisory committee is composed of Rubin Observatory members with a wide 
 
 \begin{itemize}
 
-    \item Sean MacBride - Rubin ToO coordinator
+    \item Sean MacBride - Rubin ToO coordinator and Camera expert
     \item Zeljko Ivezic - Rubin Construction Project Director
     \item Bob Blum - Rubin Operations Director
     \item Keith Bechtol - System Verification and Validation Scientist
     \item Robert Lupton - Commissioning scientist
     \item Yousuke Utsumi - ToO Scientist and Camera expert
-    \item Eric Bellm - Prompt processing lead
+    \item Raffaella Margutti - TVS Multiwavelength Characterization and Counterparts Coordinator 
+    \item Eric Bellm - Prompt processing and alert production lead
     \item Federica Bianco - Deputy project scientist
     \item Tiago Ribeiro - Scheduler scientist and software architect
     \item Shreya Anand - Rubin-LVK Liaison

@@ -4,7 +4,10 @@
 % Package imports go here.
 \usepackage{listings}
 \usepackage{adjustbox}
-
+\usepackage{tikz} 
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning} 
+\usepackage{pgfgantt}
+\usepackage{datetime2} % Optional: for nicer date handling
 % Local commands go here.
 
 %If you want glossaries
@@ -36,7 +39,7 @@
 % \setDocCurator{The Curator of this Document}
 
 \setDocAbstract{%
-We describe the procedures and workflows for Target-of-Opportunity observations during commissioning and the science verification surveys. We describe the global state of the Rubin ToO system, the workflow during the early commissioning period, the responses to real and mock alerts, and lessons learned from this period. 
+We describe the global state of the Rubin Target-of-Opportunity system, the workflow during the early commissioning period, the responses to real and mock alerts, and lessons learned from this period. 
 }
 
 % Change history defined here.
@@ -44,7 +47,7 @@ We describe the procedures and workflows for Target-of-Opportunity observations 
 % Fields: VERSION, DATE, DESCRIPTION, OWNER NAME.
 % See LPM-51 for version number policy.
 \setDocChangeRecord{%
-  \addtohist{2}{2025-06-03}{Results from verification - UNRELEASED}{Sean MacBride}
+  \addtohist{2}{2025-07-13}{Results from verification and mock triggers}{Sean MacBride}
   \addtohist{1}{2025-05-29}{First revision, covering intro and systems overview.}{Sean MacBride}
   
 }
@@ -69,7 +72,7 @@ We describe the procedures and workflows for Target-of-Opportunity observations 
 % \section{Existing Bottlenecks}\label{sec:existingBottlenecks}
 % \input{bottlenecks.tex}
 \newpage
-\section{Tests and ToO Responses}\label{sec:ToOEvents}
+\section{ToO Responses}\label{sec:ToOEvents}
 \input{testsAndTriggers.tex}
 \newpage
 \section{Lessons learned from SV testing}\label{sec:LessonsLearned}
@@ -81,6 +84,9 @@ We describe the procedures and workflows for Target-of-Opportunity observations 
 \newpage
 \section{Detailed results from validation tests} \label{sec:validationResults}
 \input{schedulerValidationResults}
+\newpage
+\section{Alert Packet Schema} \label{appendix:SCiMMASchema}
+\input{scimmaSchema}
 \newpage
 \section{References} \label{sec:bib}
 \renewcommand{\refname}{} % Suppress default Bibliography section

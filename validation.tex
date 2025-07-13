@@ -1,30 +1,7 @@
 \subsection{Incoming alert stream}\label{subsec:alertStream verification}
 
-SCiMMA delivers alerts to Rubin infrastructure through Hopskotch. Hopskotch is a service which provides a publish-subscribe capability for astrophysical alerts. Hopskotch sends a data packet to the Rubin EFD with the following type:
+SCiMMA delivers alerts to Rubin infrastructure through Hopskotch. Hopskotch is a service which provides a publish-subscribe capability for astrophysical alerts. Hopskotch sends a data packet to the Rubin EFD with a standard schema, which can be found in appendix \ref{appendix:SCiMMASchema}.
 
-\begin{lstlisting}
-        {"namespace": "lsst.scimma",
-         "type": "record",
-         "name": "ToO_alert",
-         "fields": [
-               {"name": "alert_type",
-                 "type": "string"},
-               {"name": "event_trigger_timestamp",
-                 "type": "string"},
-               {"name": "reward_map",
-                 "type": {"type": "array",
-                          "items": "boolean"}},
-               {"name": "reward_map_nside",
-                 "type": "int"},
-               {"name": "is_test",
-                 "type": "boolean"},
-               {"name": "is_update",
-                 "type": "boolean"}
-                   ]
-                }
-\end{lstlisting}
-
-The data sent in an alert packet is received at the EFD, where the scheduler CSC collects it. While the Rubin architecture to process incoming alerts has been in place for some time, the receipt of alert data at the EFD from the Rubin ToO group on the SCiMMA Hopskotch service.
 
 \begin{figure}
     \centering
@@ -33,7 +10,7 @@ The data sent in an alert packet is received at the EFD, where the scheduler CSC
     \label{fig:SCiMMA-test result}
 \end{figure}
 
-On June 5, 2025, the SCiMMA group demonstrated the capability to send ToO alert packets to the Rubin EFD, including metadata, skymap data, and alert identifiers.
+The data sent in an alert packet is received at the EFD, where the scheduler CSC collects it. On June 5, 2025, the SCiMMA group demonstrated the capability to send ToO alert packets to the Rubin EFD, including metadata, skymap data, and alert identifiers.
 
 \subsection{The Rubin Scheduler}\label{subsec:Scheduler verification}
 
@@ -60,7 +37,7 @@ GW: BBH, bright time                                & Pass \\ \hline
 Neutrino                                  & Pass                 \\ \hline
 Potentially hazardous asteroid                      & Pass                 \\ \hline
 \end{tabular}
-\caption{The results of strategy testing in the Rubin scheduler for SV required strategies.}
+\caption{The results of strategy testing in the Rubin scheduler for anticipated SV strategies.}
 \label{tab:SVRequiredStrategy results}
 \end{table}
 
@@ -74,7 +51,7 @@ While galactic SN, lensed BNS, and large GW skymaps are not expected during the 
 \centering
 \begin{tabular}{|l|l|}
 \hline
-ToO strategy from ToO 2024 recommendation & Testing result       \\ \hline
+\textbf{ToO strategy from ToO 2024 recommendation} & \textbf{Testing result}       \\ \hline
 Galactic SN                              & Pass                 \\ \hline
 Lensed BNS                              & Pass, with caveats                 \\ \hline
 GW: large skymap                              & Not supported                 \\ \hline
@@ -83,15 +60,85 @@ GW: large skymap                              & Not supported                 \\
 \label{tab:SVOptionalStrategy results}
 \end{table}
 
-The galactic SN strategy passed validation tests. Discussions about using a different scheduler configuration for the case of a galactic SN are ongoing, and additional testing may be required to evaluate this option. The lensed BNS strategy passed, with some caveats about epoch timing. Epoch timing is affected significantly by set/rise time, since the requested number of observations on a given night in either the large or small sky-area case is near a complete night. The priorities of inaccurate epoch timing or fewer visits is currently being discussed with the Rubin science community. For large GW skymaps, coverage should be coordinated with the SCOC, and the Rubin scheduler will not support these kinds of alerts.
+The galactic SN strategy passed validation tests. Discussions about using a different scheduler configuration for the case of a galactic SN are ongoing, and additional testing may be required to evaluate this option. The lensed BNS strategy passed, with some caveats about epoch timing. Epoch timing is affected significantly by set/rise time, since the requested number of observations on a given night in either the large or small sky-area case is near a complete night. The priorities of inaccurate epoch timing or fewer visits is currently being discussed with the Rubin science community. For large GW skymaps, coverage should be coordinated with the SCOC, and the Rubin scheduler ToO program will not support these kinds of alerts.
 
-\subsection{Full system tests}\label{subsec:systemTests verification}
+\subsection{Preparation for full system tests}\label{subsec:systemTests verification}
 
 The previous verifications in sections \ref{subsec:alertStream verification} - \ref{subsec:Scheduler verification} were needed to validate individual components of the ToO workflow from figure \ref{fig:workflowDiagram}. With the previous components validated in isolation, it is imperative to test the system in its entirety. To do so, we injected a mock ToO event in a previously imaged region, and considered the case where template images either exist or do not exist. Considering both of these cases covers the complete parameter space of PP conditions, with a non-templated region being the more likely possibility during SV.
 
 For both cases, we consider observations of the same region of the sky where templates exist. In the non-templated test case, we ignore existing templates to provide a 1:1 comparison to the typical PP workflow.
 
-\subsubsection{Non-templated region}\label{subsubsec:systemTests NonTemplated}
+Alternative template sources have been imported from the DECADE \citep{anbajagane2025decadecosmicshearproject}, DES DR2 \citep{Abbott_2021}, and DELVE \citep{delve} surveys. The confluence of these surveys provides continuous coverage over the LSST footprint in DECam g-r-i-z bands, and coverage in the southern galactic cap in the DECam Y band.
 
+% \begin{figure}
+%     \centering
+%     \includegraphics[width=\linewidth]{}
+%     \caption{Caption}
+%     \label{fig:enter-label}
+% \end{figure}
 
-\subsubsection{Templated region}\label{subsubsec:systemTests templated}
+\subsection{Test event: New Horizons field}\label{subsec:systemTestEvent}
+
+We triggered a ToO on the night of July 6, 2025, to  We focused on an area centered at (285.2,-19.8), known as the New Horizons field. This area is an optimal choice for evaluating the performance of the custom image processing pipeline using DECam templates, as Rubin had already acquired templates in multiple bands at the time of observation.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{figures/validationTests/NH_Trigger.png}
+    \caption{The injected skymap for the new horizons ToO test}
+    \label{fig:NH_skymap}
+\end{figure}
+
+The injected alert schema follows the LVK AVRO schema. This provides a direct test of the alert handling and record formatting to the EFD. To simulate an object on the new horizons field, we ran simulations of BBH GW events to generate realistic multi-order skymaps. We modified several parameters in the alert packet to pass the alert criteria thresholds, including the \texttt{HasNS}, \texttt{HasRemnant}, and \texttt{classification} fields. 
+
+The observing strategy was configured as follows:
+
+\begin{itemize}
+    \item \textbf{Visits}: 2 visits per epoch
+    \item \textbf{Epoch timing}: 0, 1, 2, and 24 hours
+    \item \textbf{Bands}: griz for the first three epochs, ri for the final epoch
+    \item \textbf{Exposure times}: 30 seconds for each visit
+    \item \textbf{Safety masks}: Avoid direct wind, with a maximum speed of 20 km/h. Avoid the moon, with a lunar avoidance zone of 30$\deg$.
+\end{itemize}
+
+For this test, we elected to only observe the first two epochs.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Event} & \textbf{Timestamp / Details} \\
+\hline
+Alert injected to SCiMMA & 03:22:54 \\
+Alert received at EFD & Received successfully \\
+Alert processed by Scheduler CSC & 03:32:07 \\
+\hline
+\textbf{First Observation Epoch Start} & 03:33:47 \\
+Notes & Filter change errors encountered \\
+Filter Counts & g: 10, r: 7, i: 7 \\
+\textbf{First Observation Epoch End} & 04:24:28 \\
+\hline
+\textbf{Second Observation Epoch Start} & 04:53:24\\
+Filter Counts & g: 9, r: 7, i: 7, z: 7 \\
+\textbf{Second Observation Epoch End} & 05:27:59 \\
+\hline
+\end{tabular}
+\caption{Timeline of alert ingestion and observation epochs, where timestamps are from night of 2025-07-07 (UTC)}
+\end{table}
+
+Evaluation of the image processing for this event is ongoing, and has been impacted significantly by the USDF outage that began on July 7, 2025.
+
+In review of the activities of this test, the Rubin ToO group found many places where improvement is needed for efficient operations during the LSST. Topics that are \underline{underlined} reflect changes that have not yet been validated or implemented to the Rubin system. 
+
+\begin{itemize}
+    \item \textbf{\underline{Flush time}}: Each ToO survey has a flush time, where upon receipt of an associated ToO, will flush scheduled observations from the observing queue out to a specified date. By enacting a flush time, we keep observations from lingering past when they should be executed. For an operational ToO, the flush time should reflect the latest expected time when a ToO observation is still scientifically relevant.
+    \item \textbf{\underline{Alert payload changes}}: We identified two places where the alert payload received at the EFD could be immediately improved. First, adding fields for the area of the maximum probability RA/DEC would provide the scheduler with an initial pointing to maximize the probability of ToO discovery for early observations. Additionally, detailed probability location information to the healpix map passed to the EFD is another area that can drastically improve ToO observing performance. At present, the skymap passed to the EFD is a mask, where unmasked healpix pixels are observed by Rubin. By adding detailed probability information, we can begin moving toward an optimal tiling pattern that prioritizes high probability regions of the sky, alongside the other safety masks.
+    \item \textbf{\underline{Pointing generation}}: In the present implementation, the ToO uses a fixed pointing grid for a single night. While this is satisfactory for testing, the initial pointing grid is not specific to the ToO. In an optimized scenario, point centers could be placed to ensure that maximum coverage of the ToO area is achieved without unnecessary repeated visits.
+    \item \textbf{\underline{Script failure behavior}}: When we experienced a script failure in the first epoch of observation during a filter change from from $r\rightarrow z$ band, the z band observations were not acquired, skipping the entire band of observations. While this was a test event and the scientific loss was minimal, this behavior is not desired. Additional changes are needed to the Rubin scheduler to repeat ToO observations that failed due to faults in Rubin Observatory. 
+    \item \textbf{\underline{Alert updates}}: Often, external experiments will send updated alert packets that reflect extended analysis of external astrophysical sources. The updated localizations in update alerts are usually smaller than the initial alerts that are received at the EFD. The best approach for handling update alert packets is to update the EFD record that is ingested by the scheduler CSC. However, this does not account for the scheduler checking the EFD for the updated map localization. This improvement would use the most reliable data released by external experiments and decrease the total ToO observation time to better balance observing time with the other LSST surveys.
+    \item \textbf{\underline{Stopping an observation}}: Rubin Observatory is optimized for discovery. It remains an open question among the scientific community and SCOC at which point Rubin observations of a ToO should be stopped. The current implementation is such that all requested ToO observations be completed. It is operationally important to have a stop functionality implemented to prevent additional observations of ToO's that may be scientifically irrelevant, as retractions are commonly published by scientific collaborations on occasion.
+    \item \textbf{\underline{Scheduling time of observation}}: In the current implementation, the scheduled time of observation of a ToO is based upon the first available time of observation, i.e., when the ToO target is not blocked by any of the safety masks. While this strategy ensures that if a ToO is observable, it will be scheduled by the Rubin scheduler, it does not maximize the observing conditions for a ToO event based upon airmass, lunar separation, object rise and set times, the estimated time of observation, and other factors. Scheduling a ToO at an optimal time ensures that the data quality for an interrupt is optimized. Remaining work is needed in this area.
+    \item \textbf{Metadata}: ToO surveys should have a unified metadata scheme for ease of record retrieval. Going forward, the agreed schema for \texttt{target\_name\_base} is \texttt{ToO\_science\_specifier}, where \texttt{science} is associated with a specific science case (i.e. GW, neutrino, SSO, etc.) and \texttt{specifier} (optional) is associated with a sub-strategy of that science case (i.e. for GW, gold, silver, or BBH).
+    \item \textbf{Safety masks}: The scheduler configuration for the test event had minimal safety masks, only for wind and lunar avoidance. To rectify this in the future, the standard safety masks have been added to all ToO's. This includes lunar avoidance, bright planet avoidance, high wind avoidance, avoidance of specific areas on the sky, standard thresholds for alt/az limits on the TMA, and a basis function to avoid pointing toward sunrise late in the night during commissioning. While these standard safety masks have been designed to maintain safety of LSSTCam and the TMA for maximum efficiency during SV and the LSST, some of these criteria may be relaxed considering the time-sensitivity of certain ToO's. Evaluation is ongoing to determine what safety masks can be relaxed to maximize ToO science quality while maintaining safety of Rubin Observatory.
+    \item \textbf{Scheduler CSC lookback time}: The scheduler CSC has a lookback time, which when enabled, will look back in time by a fixed amount of time to ingest new alerts. For testing the ToO system, this time was set to fifteen minutes, such that spurious alerts with invalid schema or for the purpose of testing are not picked up for on-sky observation. Following our first test of the ToO system, this time has increased to two hours. For long term operations, this time should be increased to 18 hours minimum, to support ingestion of alerts that were received after dome closure at the end of the night. In event of dome closure due to weather or performance issues, this time should be increased, possibly temporarily, to pick up any ToO alerts that were generated during the downtime.
+    \item \textbf{Multi-night observations}: Since we elected to observe only the first two epochs for this test event, we did not evaluate if the scheduler would schedule observations upon a new initialization on a different day. We have since validated that multi-day observations will be scheduled by the Rubin scheduler through testing at BTS. 
+\end{itemize}
