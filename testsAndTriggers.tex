@@ -81,13 +81,69 @@ The filter and visit behavior raises notable issues about this ToO observation f
 The pointing behavior needs further investigation to fully understand what is going on. However, immediate improvements can be made by defining a pointing grid for the ToO that has pointings centered on each healpix location. While this is \textbf{not} a final solution, this allows us to disentangle the root issue of visit timing vs. visit location behavior.
 
 
-% \subsection{GW event S250725j}\label{subsec:S250725j}
+\subsection{GW event S250725j}\label{subsec:S250725j}
 
-% Gravitational wave event S250725j is a binary black-hole event, that was observed by the LVK detector network at 
+The gravitational wave event S250725j is a high-SNR binary black hole event that was observed by the LVK detector network at 04:09:58 UTC on 2025-07-25. S250725j was localized to a 90\% area of 18.6 $\deg^2$, meeting the alert quality criteria for a BBH event from \cite{RubinToO2024}.
+
+After discussion within the Rubin-commissioning ToO advisory board, we elected to trigger a ToO on S250725j.
+
+\subsubsection{Night of July 28, 2025}
+
+The observing plan was as follows:
+
+\begin{itemize}
+    \item \textbf{Exposure times}: 30 second exposures.
+    \item \textbf{Epochs}: Epoch spacing as requested in \cite{RubinToO2024} (see below).
+    \item \textbf{Visits}: one visit per epoch.
+    \item \textbf{Filters}: u-g-r requested, u-g-i observed (see below).
+    \item \textbf{Dithers}: Dither between exposures with a maximum of 0.01 degrees (36 arcseconds).
+    \item \textbf{Safety masks}: The complete suite of safety masks used by the SV surveys.
+\end{itemize}
+
+\begin{figure}[b!]
+    \centering
+    \includegraphics[width=\linewidth]{figures/testsAndTriggers/25j_skymap.png}
+    \caption{Left: The skymap of S250725j, showing the localization area concentrated near $(234º, -35º)$. Right: The pointings acquired as part of the 2025-07-28 observations shown in grey circles. The area covered by the Rubin pointings covers 94\% of the LVK localization probability. Candidates reported by other observing teams using DECam are shown overplotted on the skymap.}
+    \label{fig:25j-skymap}
+\end{figure}
+
+Epoch spacing for this ToO was planned around log-spacing observations over nights, resulting in observations on nights 1-3-8-10-39 after the alert is received. In practice, the observations from the night of 2025-07-28 were the only observations obtained due to a combination of weather constraints and other commissioning activities.
+
+The filter request for a binary-black hole merger of this distance and type is u-g-r bands. Due to an engineering problem with the FCS of LSSTCam, the g band was not available. As a result, we set the observing strategy to observe in u-r-i bands.
+
+The alert packet was submitted to the ToO alert stream at 02:16:22.407 UTC, and received at the Rubin EFD at 02:16:25 UTC, approximately 3 seconds later.
+
+Conditions on the night of observing were nominal. We reached a median depth of 24.1 mag in r band, 23.8 mag in the i band, and 23.6 in u band. An issue in the Scheduler CSC caused the field to be observed two times, mimicking previous ToO tests where the Scheduler CSC continued observing the field of a ToO until the scheduler configuration was disabled.
 
 
-% Given the rarity of the object and the excitement generated within the Rubin scientific community, we elected to test the ToO system on 3I/ATLAS. 
+\subsubsection{Pointing efficiency}
 
-% Many other science exposures of 3I/ATLAS have been obtained, as the object has been in the Rubin SV survey footprint for some time before its official identification. Here, we focus only on observations triggered by the ToO system.
+This ToO is the first test on-sky of a ToO area that is larger than a single Rubin pointing. Therefore, this event provides a unique opportunity to evaluate the efficiency of covering a ToO area to completion. For all GW ToO events, the relevant area that needs to be covered is the 90\% area. A detailed analysis of point efficiency for this event can be found in the \href{https://github.com/lsst-sitcom/ToO-analysis-tools/blob/ef84da607cad62606d489eb61ee7aa4e61063e4c/notebooks/PointingEfficiency.ipynb}{\texttt{ToO-analysis-tools}} github repository.
 
-% \subsubsection{Night of July 28, 2025}
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/testsAndTriggers/efficiencyFig.png}
+    \caption{The efficiency of covering the area of S250725j, represented as a proportion of the 50\% and 90\% localization areas.}
+    \label{fig:pointingEfficiencyFig}
+\end{figure}
+
+For each pass in each filter, 100\% of the 50\% probability region was covered, and 99.576\% of the 90\% region was covered. Additionally, the 50\% region was covered at a rate of $1.64 \deg^2$/min, and the 90\% region was covered at a rate of 4 $\deg^2/$min.
+
+\subsubsection{Image processing and candidate vetting}
+
+\begin{figure}[b]
+    \centering
+    \includegraphics[width=\linewidth]{figures/testsAndTriggers/candidateComparison_25j.png}
+    \caption{AT2025sib, one of the four reported Rubin candidates in GCN 41595, as viewed by LSSTCam and DECam, each with a field of view of ~14" on each edge. The top row of images are from Rubin Observatory, the bottom row of images were taken with DECam. Search (left), template (center), and difference (right) images. The template images for Rubin difference imaging are from DES DR2 co-additions for this region of the sky.}
+    \label{fig:25j_candidateComparison}
+\end{figure}
+
+To process and analyze the observations from this event, we used the bespoke image processing pipeline as described in section \ref{subsec:systemTests verification}. For this region of the sky, template level coadds from DES DR2 were available.
+
+The location of this GW event is nearby the galactic plane, and therefore a crowded field. Proximity to the galactic plane causes well known problems with the WCS solution. The issues with the WCS solution in search images propagates to the difference images, resulting in many bad subtractions, dipoles, and other artifacts in the difference images.
+
+% Maybe add an image of the bad wcs fits here?
+
+After processing the relevant visits through the bespoke image processing pipeline, we applied a minimal set of flags to remove visits that have dipoles, cosmic rays, and other artifacts. Despite this quality cut, we identified $\sim25$k DIA candidates per visit, which far exceeds the ability of human vetting capabilities.
+
+After assessing the excess of candidates from the bespoke image processing pipeline, the analysis group pivoted to review of transient candidates reported by other teams using DECam (see figure \ref{fig:25j_candidateComparison}). The results of the inspection of DECam candidates were reported in GCN 41595 \citep{MacBride_Anand_Howard_2025}.
