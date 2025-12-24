@@ -1,4 +1,4 @@
-The first activations and testing of the Rubin ToO program has been a resounding success. Depite these achievements, many areas of improvement remain for the ToO program to operate efficiently over the ten year LSST.
+The first activations and testing of the Rubin ToO program has been a resounding success. Depite these achievements, many areas of improvement remain for the ToO program to operate efficiently over the ten year LSST. The items listed below are in addition to the technical improvements from sections \ref{subsec:systemTestEvent} and \ref{subsec:3I}.
 
 \begin{enumerate}
 
@@ -65,7 +65,7 @@ These success definitions, specific to each ToO target class and informed by the
 
 \item \textbf{Interventional Measures to Start and Stop Observations}
 
-We cannot predict when exotic phenomena will occur over the ten-year LSST. Even in commissioning, non-standard ToOs similar to 3I-ATLAS will occur and require a ToO response. The ability to initiate ToO observations outside of the standard alert criteria, while bespoke, exists in the current implementation.
+We cannot predict when exotic phenomena will occur over the ten-year LSST. As demonstrated in commissioning, a non-standard ToO (3I-ATLAS) occurred, requiring a ToO response outside of the standard operation. The ability to initiate ToO observations outside of the standard alert criteria, while bespoke, exists in the current implementation.
 
 Similarly, operational controls must support the intervention to terminate ToO observations once success has been achieved. This mechanism provides a safeguard against erroneous alerts and enables a flexible response to evolving science priorities.
 
@@ -81,7 +81,7 @@ While the stability and reliability of S3DF is something the ToO program has lit
 
 \item \textbf{Clear Communication Channels with Other Experiments}
 
-ToO operations are multi-messenger - both from the science perspective, but from the operational perspective as well. Formal communications with LVK helped provide the necessary information to inform a followup decision on S250725j during the SV period. Maintaining these communications with LVK will be critical as new interferometer sensitivities increase the rate of detected GW events during the LSST.
+ToO operations are multi-messenger - both from the science perspective, but from the operational perspective as well. Formal communications with LVK helped provide the necessary information to inform a followup decision on S250725j. Maintaining these communications with LVK will be critical as new interferometer sensitivities increase the rate of detected GW events during the LSST.
 
 If possible, formal communications channels with the IceCube and Super-K collaborations would benefit Rubin ToO from a decisionmaking perspective, to certify private information of specific alert qualities to best inform followup strategy. A significant portion of this expertise will come from the ToO advisory committee, however, a point-of-contact looking at the data from the external experiment can provide valuable insight that should be sustained throughout the duration of the LSST.
 
@@ -92,14 +92,14 @@ Transparent communication channels with the external community foster trust and 
 This should not be the status quo, and two methods of communication exist to work with the science community as a ToO followup is happening:
 \begin{itemize}
     \item \textbf{ObsLocTAP:} as described in \cite{DMTN-263}, the Rubin observing schedule will be publicly accessible through the ObsLocTAP service. This includes target names, from which ToO observations can be inferred. While not a direct confirmation of a ToO followup, ObsLocTAP provides a live view into the visit data for Rubin observatory observations, which can be cross-matched to recent ToO's of interest by members of the community. This is an indirect method, and not ideal for communicating information to the Rubin Science Community.
-    \item \textbf{Rubin Community posts:} This is a direct method of communication with the Science Community. When a ToO is triggered, a simple message on the Rubin Community Forum could notify the science community that a ToO is being triggered, details on the intended observing strategy, and where to go to access relevant data products. This is the most straightforward route to build trust from the scientific community in Rubin ToO responses.
+    \item \textbf{Rubin Community posts:} This is a direct method of communication with the Science Community. When a ToO is triggered, a message on the Rubin Community Forum could notify the science community that a ToO is being triggered, details on the intended observing strategy, and where to go to access relevant data products. This is the most straightforward route to build trust from the scientific community in Rubin ToO responses.
 \end{itemize}
 
 \item \textbf{Regular Mock Alert Exercises}
 
 Mock alert exercises are essential for validating end-to-end system behavior under realistic conditions. We learned quite a bit from testing the system on-sky, but ToO responses can be simulated without using valuable on-sky time. This is being explored for alert receipt and parsing in the Rubin ToO mock-data-challenge \citep{RTN-107}. These exercises reveal integration gaps and uncover software inconsistencies.
 
-Regular rehearsals ensure that both automated systems and human workflows remain operationally ready. In periods of low activity (when LVK detectors are offline), we recommend that a mock ToO response should occur monthly on the BTS environment, including alert receipt, observing strategy generation, and execution of simulated observations. This controlled trial of the ToO workflow will protect against bitrot, integrate new workflows and alert schemas, and validate observing strategies to drive the program forward as we begin the LSST in 2026.
+Regular rehearsals ensure that both automated systems and human workflows remain operationally ready. In periods of low ToO activity (when LVK detectors are offline), a mock ToO response should occur monthly on the BTS environment, including alert receipt, observing strategy generation, and execution of simulated observations. This controlled trial of the ToO workflow will protect against bitrot, integrate new workflows and alert schemas, and validate observing strategies to drive the program forward as we begin the LSST in 2026.
 
 \item \textbf{Tolerance for Experimentation}
 
