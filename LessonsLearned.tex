@@ -1,0 +1,112 @@
+The first activations and testing of the Rubin ToO program has been a resounding success. Depite these achievements, many areas of improvement remain for the ToO program to operate efficiently over the ten year LSST.
+
+\begin{enumerate}
+
+% \item \textbf{Actionable Alert Criteria Through Community Engagement}
+
+% The scientific utility of ToO observations depends critically on clearly defined criteria that distinguish actionable alerts from anomalous or low–priority triggers. Engaging with the external time-domain community allows the Observatory to formalize quantitative selection thresholds (e.g., localization area, false-alarm rate, distance estimates, and expected brightness) that align operational response with scientific return.
+
+% Community-defined criteria also reduce subjective decision-making during time-critical operations, allowing alerts to be evaluated reproducibly by automated services and operators alike. This ensures that Rubin resources are applied to events with the highest scientific leverage.
+
+\item \textbf{Consolidation and Availability of Alert Sources}
+
+Rapid and reliable ToO response requires alerts to be ingested in machine-readable form. Machine readable alerts significantly reduce latency compared to manual workflows. 
+
+Of the four experiments used for Rubin ToO triggers, LVK (GW) and IceCube (neutrino) alerts are fully supported through a kafka stream on SCiMMA. For galactic supernovae, Super-Kamiokande alerts are supported as a mirror of a GCN kafka stream with no integration to the SuperNova Early Warning System (SNEWS). As of \today, no kafka stream for potentially hazardous asteroids is available.
+\begin{itemize}
+    \item We strongly encourage the JPL-Scout program and the forthcoming JPL-NEO Surveyor program to publish fully-machine-readable alerts to a Kafka stream, to support localization efforts from Rubin ToO followup. 
+    \item We look forward to using the SuperNova Early Warning System version 2.0 (SNEWS 2.0) alert system with integration of Super-Kamiokande alerts.
+\end{itemize}
+
+\item \textbf{Flexible Alert Schemas for the Rubin EFD}
+
+The Rubin ToO program spans a wide range of astrophysical phenomena, each alert with distinct metadata. A flexible alert schema at the Rubin EFD allows the Observatory to support existing science cases with the required metadata, and new science cases without requiring disruptive changes to the core scheduling or control software.
+
+Schema flexibility will enable detailed probability localization information, probability-weighted distance estimation used in GW followup, or extinction priors for galactic supernovae observations. This detail will provide the necessary information for observing strategies to be precise in their execution.
+
+\item \textbf{System Readiness Metrics}
+
+Readiness and response must be assessed using metrics that extend beyond image-quality conditions. System availability, alert ingestion latency, scheduling response time, and interaction with telescope operators are equally critical for successful ToO execution.
+
+Establishing standard metrics for every ToO response provides an active assessment of the Observatory’s ability to respond to time-critical science and identifies bottlenecks that may not be visible in traditional observing efficiency statistics.
+
+\item \textbf{Clear Definition of Operational Workflow and Coordination}
+
+One source of friction during SV ToOs was that many individuals were willing to contribute and take action for a ToO campaign, but no single person or entity had the authority to adjudicate and commit to a specific direction. While operations will benefit from a ToO advisory committee, codifying decisionmaking processes will remain a priority.
+
+As we transition from commissioning to operations, a clear technical workflow similar to figure \ref{fig:workflowDiagram} needs augmentation with decision nodes for relevant stakeholders, with the relevant stakeholders clearly defined. In addition to workflow definition, the appropriate authority must be granted to stakeholders at their respective decision nodes. This will establish clear responsibilities across operations, data management, and science teams.
+
+Formal coordination will minimize ambiguity during high-pressure events and ensure that operational decisions are consistent, auditable, and reproducible. 
+
+\item \textbf{Communications with Summit Scientists}
+
+Providing clear communication to summit staff is crucial for the long term success of the Rubin ToO program. Drawing on the experience from the observing campaigns during the SV program, two areas of improvement are necessary:
+
+\begin{itemize}
+    \item \textbf{Communication of alert receipt to summit staff:} Currently, a slack bot is the only communication mechanism visible on public communication channels. A watcher alarm would be the most direct way to immediately notify the relevant summit staff that a ToO has entered the observation queue.
+    \item \textbf{Simulated observing plans for received ToO alerts:} This resource will provide observers with the foreknowledge to anticipate schedule changes, including expected observation times of specific ToO observing campaigns.
+\end{itemize}
+
+This transparency reduces operational stress and improves overall efficiency during time-critical campaigns.
+
+\item \textbf{Defined ToO Campaign Outcomes}
+
+Clearly articulated success criteria for different ToO targets serve three purposes:
+
+\begin{itemize}
+    \item With success criteria, quantitative assessment of observing strategy can be made - did we observe too much, or too little? With this in hand, future revisions to observing strategy can be grounded in data and historical outcomes. 
+    \item By defining the conditions where a target has been sufficiently observed by Rubin and handed off to other observatories, we can inform the decision to stop observing a ToO and return to observing other fields of the LSST.
+    \item These critera enable transparent reporting to the broader community about the success or otherwise of a specific ToO campaign.
+\end{itemize}
+
+Potential success criteria could be as simple as detection in a single band, or as complex as coverage of 24 magnitude or greater in r band over the entire 90\% localization region within eighteen hours of alert receipt.
+
+These success definitions, specific to each ToO target class and informed by the science community, will guide LSST operations through data-driven revision of observing strategies and criteria-driven decisions on observing plans. 
+
+\item \textbf{Interventional Measures to Start and Stop Observations}
+
+We cannot predict when exotic phenomena will occur over the ten-year LSST. Even in commissioning, non-standard ToOs similar to 3I-ATLAS will occur and require a ToO response. The ability to initiate ToO observations outside of the standard alert criteria, while bespoke, exists in the current implementation.
+
+Similarly, operational controls must support the intervention to terminate ToO observations once success has been achieved. This mechanism provides a safeguard against erroneous alerts and enables a flexible response to evolving science priorities.
+
+In addition to developing the technical capability, the workflow from the decision-making person or entity to the personnel with the technical expertise to execute on specific decisions must be defined. Whenever possible, lower barriers to system interaction will aid in minimizing the latency of decisions propagating to the system.
+
+\item \textbf{USDF and RSP Stability During Time-Sensitive Processing}
+
+ToO science depends on the stability and uptime of the U.S. Data Facility and other services of the Rubin Science Platform. While responding to the S250725j trigger, some services including \texttt{Firefly} were unreliable, preventing rapid analysis of potential candidates. Additionally, bespoke image processing was delayed due to standard queue wait times for Rubin users on S3DF. 
+
+If possible, a special accounting group for time sensitive ToO reprocessing of Rubin image products would aid significantly in rapid analysis and information dissemination of specific candidates to the scientific community.
+
+While the stability and reliability of S3DF is something the ToO program has little capacity to fix on its own, we note the direct consequence to time-sensitive analyses and potential for disruption to serendipitous discovery in the future. Infrastructure resilience directly translates into scientific outcomes.
+
+\item \textbf{Clear Communication Channels with Other Experiments}
+
+ToO operations are multi-messenger - both from the science perspective, but from the operational perspective as well. Formal communications with LVK helped provide the necessary information to inform a followup decision on S250725j during the SV period. Maintaining these communications with LVK will be critical as new interferometer sensitivities increase the rate of detected GW events during the LSST.
+
+If possible, formal communications channels with the IceCube and Super-K collaborations would benefit Rubin ToO from a decisionmaking perspective, to certify private information of specific alert qualities to best inform followup strategy. A significant portion of this expertise will come from the ToO advisory committee, however, a point-of-contact looking at the data from the external experiment can provide valuable insight that should be sustained throughout the duration of the LSST.
+
+\item \textbf{Clear Communication and Engagement with the External Community}
+
+Transparent communication channels with the external community foster trust and clarify operational performance for specific ToOs. While much of the focus during the SV period was on delivering a working ToO system, engagement with the community was not an emphasis. 
+
+This should not be the status quo, and two methods of communication exist to work with the science community as a ToO followup is happening:
+\begin{itemize}
+    \item \textbf{ObsLocTAP:} as described in \cite{DMTN-263}, the Rubin observing schedule will be publicly accessible through the ObsLocTAP service. This includes target names, from which ToO observations can be inferred. While not a direct confirmation of a ToO followup, ObsLocTAP provides a live view into the visit data for Rubin observatory observations, which can be cross-matched to recent ToO's of interest by members of the community. This is an indirect method, and not ideal for communicating information to the Rubin Science Community.
+    \item \textbf{Rubin Community posts:} This is a direct method of communication with the Science Community. When a ToO is triggered, a simple message on the Rubin Community Forum could notify the science community that a ToO is being triggered, details on the intended observing strategy, and where to go to access relevant data products. This is the most straightforward route to build trust from the scientific community in Rubin ToO responses.
+\end{itemize}
+
+\item \textbf{Regular Mock Alert Exercises}
+
+Mock alert exercises are essential for validating end-to-end system behavior under realistic conditions. We learned quite a bit from testing the system on-sky, but ToO responses can be simulated without using valuable on-sky time. This is being explored for alert receipt and parsing in the Rubin ToO mock-data-challenge \citep{RTN-107}. These exercises reveal integration gaps and uncover software inconsistencies.
+
+Regular rehearsals ensure that both automated systems and human workflows remain operationally ready. In periods of low activity (when LVK detectors are offline), we recommend that a mock ToO response should occur monthly on the BTS environment, including alert receipt, observing strategy generation, and execution of simulated observations. This controlled trial of the ToO workflow will protect against bitrot, integrate new workflows and alert schemas, and validate observing strategies to drive the program forward as we begin the LSST in 2026.
+
+\item \textbf{Tolerance for Experimentation}
+
+The Target-of-Opportunity program will benefit from a structured tolerance for experimentation. This tolerance has been demonstrated through the SV period, enabling large improvements in our understanding of the system, and the first observations using Rubin Observatory with the express intent of searching for new discoveries in the universe. 
+
+With an appetite for observing the exotic, this experimentation should be maintained by the ToO advisory committee, and acted upon when deemed necessary. 
+
+While the authority to intervene on non-standard targets is placed in the ToO advisory committee, there must be a balance to still observe standard ToOs and remain in the 3\% time allocation endorsed by the SCOC. Maintaining this will be paramount to the success of the Rubin ToO program as we progress through the ten-year LSST.
+
+\end{enumerate}
