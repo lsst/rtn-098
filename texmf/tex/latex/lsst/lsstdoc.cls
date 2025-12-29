@@ -249,6 +249,10 @@
    \renewcommand{\CU}{DM}
    \renewcommand{\docType}{Data Management}
 }
+\DeclareOption{CTN}{
+   \renewcommand{\CU}{CTN}
+   \renewcommand{\docType}{Camera Technical Note}
+}
 \DeclareOption{TS}{
    \renewcommand{\CU}{TS}
    \renewcommand{\docType}{Telescope \& Site}
@@ -321,6 +325,12 @@
 
 \newcommand{\docDate}{set the date with {$\backslash$}setDocDate}
 \newcommand{\setDocDate}[1]{\renewcommand{\docDate}{#1}}
+
+\newcommand{\docDOI}{DOI if applicable}
+\newcommand{\setDocDOI}[1]{\def\@docDOI{#1}
+  \renewcommand{\docDOI}{#1}
+}
+\setDocDOI{}
 
 % allow standard \date{} to work as an alias of \setDocDate
 \renewcommand{\date}[1]{\setDocDate{#1}}
@@ -492,6 +502,11 @@
     \vspace*{0.5cm}
     \textsf{\Large \bfseries\docRef}\\
     \vspace*{0.5cm}
+    \ifx \@docDOI \@empty
+      \relax
+    \else
+      \Large \bfseries \url{https://doi.org/\docDOI}\\
+    \fi
     \textsf{\Large \bfseries Latest Revision: \docDate}
     \end{center}
    \end{minipage}
@@ -1137,7 +1152,11 @@ No actions have been identified.}
 \def\nat{Nature}           % Nature
 \def\apjl{ApJ}             % Astrophysical Journal, Letters
 \def\icarus{Icarus}        % Icarus
+\def\apss{Ap\&SS}          % Astrophysics and Space Science
+\def\actaa{Acta Astron.}   % Acta Astronomica
+\def\memsai{Mem. Soc. Ast. Italiana} % Memorie della Società Astronomica Italiana
 \def\prd{Phys.~Rev.~D}     % Physical Review D
+\def\prl{Phys.~Rev.~Lett.} % Physical Review Letters
 \def\physrep{Phys.~Rep.}   % Physics Reports
 \def\pasp{PASP}            % Publications of the Astronomical Society of the Pacific
 \def\procspie{Proc.\ SPIE} % Proceedings of the SPIE
